@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#0C9EE0</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="colorNavHeader">#9AD8ED</color>
+    <color name="colorHeaderTxt">#1F2229</color>
+    <color name="colorTitleOrange1">#ffdd00</color>
+
+    <!-- Colors for indicators in MyMoneyPChartFragment -->
+    <color name="colorIndicatorRate">#92D050</color>
+    <color name="colorIndicatorSim">#FA940F</color>
+    <color name="colorIndicatorKpi">#538DD5</color>
+    <color name="colorIndicatorServices">#F6D9A0</color>
+    <color name="colorIndicatorEquip">#FFC000</color>
+    <color name="colorIndicatorBonuses">#00DDFF</color>
+
+    <!-- Colors for indicators in DealerBonusFragment -->
+    <color name="colorDBPaid">#33cc33</color>
+    <color name="colorDBNonPaid">#ff0000</color>
+</resources>

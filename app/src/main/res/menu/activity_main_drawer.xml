@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group
+        android:id="@+id/main_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_money"
+            android:icon="@drawable/ic_menu_money"
+            android:title="@string/menu_money_title" />
+        <item
+            android:id="@+id/nav_dealerbonus"
+            android:icon="@drawable/ic_menu_dealerbonus"
+            android:title="@string/menu_dealerbonus_tittle" />
+        <item
+            android:id="@+id/nav_sales_plan"
+            android:icon="@drawable/ic_menu_sales_plan"
+            android:title="@string/menu_sales_plan_title" />
+        <item
+            android:id="@+id/nav_schedule"
+            android:icon="@drawable/ic_menu_schedule"
+            android:title="@string/menu_schedule_title" />
+        <item
+            android:id="@+id/nav_instructions"
+            android:icon="@drawable/ic_menu_instructions"
+            android:title="@string/menu_instructions_title" />
+    </group>
+
+    <group
+        android:id="@+id/service_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_menu_settings"
+            android:title="@string/menu_settings_title" />
+        <item
+            android:id="@+id/nav_feedback"
+            android:icon="@drawable/ic_menu_feedback"
+            android:title="@string/menu_feedback_title" />
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@drawable/ic_menu_about"
+            android:title="@string/menu_about_title" />
+    </group>
+
+    <group
+        android:id="@+id/logout_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/ic_menu_logout"
+            android:title="@string/menu_logout_tittle" />
+    </group>
+
+</menu>

@@ -1,0 +1,50 @@
+<resources>
+    <string name="app_name">Мои деньги</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Настройки</string>
+    <string name="menu_payments_title">Выплаты</string>
+    <string name="menu_analytics_title">Аналитика</string>
+    <string name="menu_settings_title">Настройки</string>
+    <string name="menu_feedback_title">Обратная связь</string>
+    <string name="menu_about_title">О приложении</string>
+    <string name="Seller_fullname">Елизавета Белоцерковская</string>
+    <string name="post_and_dealer_name">Менеджер по продажам, ООО \'Новая Земля\'</string>
+    <string name="menu_money_title">Мои деньги</string>
+    <string name="legend_sim_label">Sim-карты</string>
+    <string name="legend_days_label">Смены</string>
+    <string name="legend_kpi_label">KPI</string>
+    <string name="legend_services_label">Услуги</string>
+    <string name="legend_equip_label">Оборудование</string>
+    <string name="legend_bonuses_label">Премии</string>
+    <string name="menu_schedule_title">График работы</string>
+
+    <string name="fixed_rate_label">Отработанные часы</string>
+    <string name="sim_sales_label">Продажа Sim-карт</string>
+    <string name="kpi_label">Выполнение KPI</string>
+    <string name="services_label">Продажа услуг</string>
+    <string name="equip_label">Продажа оборудования</string>
+    <string name="bonuses_label">Премии</string>
+    <string name="menu_sales_plan_title">План продаж</string>
+    <string name="menu_instructions_title">Инструкции продавца</string>
+    <string name="menu_logout_tittle">Выход</string>
+    <string name="menu_dealerbonus_tittle">Дилер-бонус</string>
+    <string name="title_activity_login">Вход</string>
+
+    <!-- Strings related to login -->
+    <string name="hint_phone">Номер телефона</string>
+    <string name="hint_password">Пароль</string>
+    <string name="sign_in_button_label">Войти</string>
+    <string name="sign_in_label_short">Войти</string>
+    <string name="error_invalid_phone">Неверный номер телефона</string>
+    <string name="error_invalid_password">Пароль слишком короткийt</string>
+    <string name="error_incorrect_password">Неверный пароль</string>
+    <string name="error_field_required">Это поле обязательно к заполнению</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="pick_pos_label">Для начала работы необходимо указать номер точки продаж</string>
+    <string name="confirm_pos_button_label">Подтвердить</string>
+</resources>

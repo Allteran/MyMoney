@@ -1,0 +1,290 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/report_date_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingTop="11dp"
+            android:paddingLeft="11dp"
+            android:paddingRight="11dp"
+            android:textStyle="bold"
+            android:textSize="20sp" />
+
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/pchart_whole_salary"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_below="@+id/report_date_textview" />
+
+        <RelativeLayout
+            android:id="@+id/rate_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/pchart_whole_salary"
+            android:clickable="true"
+            android:focusable="true">
+
+            <ImageView
+                android:id="@+id/indicator_fixed_rate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:clickable="false"
+                android:focusable="false"
+                android:padding="11dp"
+                android:src="@drawable/indicator_fixed_rate" />
+
+            <TextView
+                android:id="@+id/fixed_rate_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/indicator_fixed_rate"
+                android:layout_toRightOf="@+id/indicator_fixed_rate"
+                android:clickable="false"
+                android:focusable="false"
+                android:padding="5dp"
+                android:text="@string/fixed_rate_label"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/fixed_rate_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:clickable="false"
+                android:focusable="false"
+                android:padding="5dp"
+                android:text="10 000"
+                android:textSize="18sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/sim_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rate_container">
+
+            <ImageView
+                android:id="@+id/indicator_sim_sales"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:clickable="false"
+                android:focusable="false"
+                android:padding="11dp"
+                android:src="@drawable/indicator_sim_sales" />
+
+            <TextView
+                android:id="@+id/sim_sales_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/indicator_sim_sales"
+                android:clickable="false"
+                android:focusable="false"
+                android:padding="5dp"
+                android:text="@string/sim_sales_label"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/sim_sales_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:clickable="false"
+                android:focusable="false"
+                android:padding="5dp"
+                android:text="3 125"
+                android:textSize="18sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/kpi_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/sim_container">
+
+            <ImageView
+                android:id="@+id/indicator_kpi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:clickable="false"
+                android:focusable="false"
+                android:padding="11dp"
+                android:src="@drawable/indicator_kpi" />
+
+            <TextView
+                android:id="@+id/kpi_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/indicator_kpi"
+                android:clickable="false"
+                android:focusable="false"
+                android:padding="5dp"
+                android:text="@string/kpi_label"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/kpi_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:clickable="false"
+                android:focusable="false"
+                android:padding="5dp"
+                android:text="5 526"
+                android:textSize="18sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/services_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/kpi_container">
+
+            <ImageView
+                android:id="@+id/indicator_services"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:clickable="false"
+                android:focusable="false"
+                android:padding="11dp"
+                android:src="@drawable/indicator_services" />
+
+            <TextView
+                android:id="@+id/services_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/indicator_services"
+                android:clickable="false"
+                android:focusable="false"
+                android:padding="5dp"
+                android:text="@string/services_label"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/services_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:clickable="false"
+                android:focusable="false"
+                android:padding="5dp"
+                android:text="3 150"
+                android:textSize="18sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/equip_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/services_container">
+
+            <ImageView
+                android:id="@+id/indicator_equip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:clickable="false"
+                android:focusable="false"
+                android:padding="11dp"
+                android:src="@drawable/indicator_equip" />
+
+            <TextView
+                android:id="@+id/equip_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/indicator_equip"
+                android:clickable="false"
+                android:focusable="false"
+                android:padding="5dp"
+                android:text="@string/equip_label"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/equip_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:clickable="false"
+                android:focusable="false"
+                android:padding="5dp"
+                android:text="2 580"
+                android:textSize="18sp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/bonuses_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/equip_container">
+
+            <ImageView
+                android:id="@+id/indicator_bonuses"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:clickable="false"
+                android:focusable="false"
+                android:padding="11dp"
+                android:src="@drawable/indicator_bonuses" />
+
+            <TextView
+                android:id="@+id/bonuses_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/indicator_bonuses"
+                android:clickable="false"
+                android:focusable="false"
+                android:padding="5dp"
+                android:text="@string/bonuses_label"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/bonuses_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:clickable="false"
+                android:focusable="false"
+                android:padding="5dp"
+                android:text="5 861"
+                android:textSize="18sp" />
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+</ScrollView>
+

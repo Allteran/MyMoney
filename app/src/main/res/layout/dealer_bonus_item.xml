@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/ind_dealer_bonus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/date_dealer_bonus"
+        android:layout_alignParentStart="true"
+        android:clickable="false"
+        android:focusable="false"
+        android:padding="17dp"
+        android:src="@drawable/ind_db_paid" />
+    <TextView
+        android:id="@+id/date_dealer_bonus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/ind_dealer_bonus"
+        android:clickable="false"
+        android:focusable="false"
+        android:padding="10dp"
+        android:text="Декабрь 2017-го года"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/amount_dealer_bonus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignBottom="@id/date_dealer_bonus"
+        android:clickable="false"
+        android:focusable="false"
+        android:padding="10dp"
+        android:text="10 000 р."
+        android:textSize="18sp" />
+
+</RelativeLayout>

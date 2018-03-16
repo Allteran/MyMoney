@@ -1,0 +1,524 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/sales_plan_constraint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:id="@+id/sales_plan_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:padding="6dp"
+            android:text="План на март 2018"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/kpi_t2_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="10dp"
+            android:text="KPI Tele2"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sales_plan_header" />
+
+        <TextView
+            android:id="@+id/index_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="6dp"
+            android:text="Название"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/kpi_t2_header" />
+
+        <TextView
+            android:id="@+id/gi_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="3dp"
+            android:paddingRight="3dp"
+            android:paddingStart="10dp"
+            android:paddingTop="3dp"
+            android:text="Sim-карты"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/index_name" />
+
+        <TextView
+            android:id="@+id/ao_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="3dp"
+            android:paddingRight="3dp"
+            android:paddingStart="10dp"
+            android:paddingTop="3dp"
+            android:text="ФО Tele2"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/gi_name" />
+
+        <TextView
+            android:id="@+id/up_sale_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="3dp"
+            android:paddingRight="3dp"
+            android:paddingStart="10dp"
+            android:paddingTop="3dp"
+            android:text="UpSale"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ao_name" />
+
+        <TextView
+            android:id="@+id/insurance_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="3dp"
+            android:paddingRight="3dp"
+            android:paddingStart="10dp"
+            android:paddingTop="3dp"
+            android:text="Страхование"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/up_sale_name" />
+
+        <TextView
+            android:id="@+id/yadd_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="3dp"
+            android:paddingRight="3dp"
+            android:paddingStart="10dp"
+            android:paddingTop="3dp"
+            android:text="Яндекс.Addappter"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/insurance_name" />
+
+        <TextView
+            android:id="@+id/mnp_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="3dp"
+            android:paddingRight="3dp"
+            android:paddingStart="10dp"
+            android:paddingTop="3dp"
+            android:text="MNP"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/yadd_name" />
+
+        <TextView
+            android:id="@+id/kpi_dealer_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="10dp"
+            android:text="KPI Дилера"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mnp_name" />
+
+        <TextView
+            android:id="@+id/services_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="3dp"
+            android:paddingRight="3dp"
+            android:paddingStart="10dp"
+            android:paddingTop="3dp"
+            android:text="Услуги"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/kpi_dealer_header" />
+
+        <TextView
+            android:id="@+id/access_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="3dp"
+            android:paddingRight="3dp"
+            android:paddingStart="10dp"
+            android:paddingTop="3dp"
+            android:text="Аксессуары"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/services_name" />
+
+        <TextView
+            android:id="@+id/gsm_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="3dp"
+            android:paddingRight="3dp"
+            android:paddingStart="10dp"
+            android:paddingTop="3dp"
+            android:text="GSM-устройства"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/access_name" />
+
+        <TextView
+            android:id="@+id/plan_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:padding="6dp"
+            android:text="План"
+            android:textSize="16sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/index_name"
+            app:layout_constraintStart_toEndOf="@+id/yadd_name" />
+
+        <TextView
+            android:id="@+id/gi_plan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:padding="3dp"
+            android:text="116 шт."
+            android:textSize="16sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/gi_name"
+            app:layout_constraintStart_toEndOf="@+id/yadd_name" />
+
+        <TextView
+            android:id="@+id/ao_plan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:padding="3dp"
+            android:text="720 y.e."
+            android:textSize="16sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/ao_name"
+            app:layout_constraintStart_toEndOf="@+id/yadd_name" />
+
+        <TextView
+            android:id="@+id/up_sale_plan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:padding="3dp"
+            android:text="111 y.e."
+            android:textSize="16sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/up_sale_name"
+            app:layout_constraintStart_toEndOf="@+id/yadd_name" />
+
+        <TextView
+            android:id="@+id/insurance_plan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:padding="3dp"
+            android:text="1 200 р."
+            android:textSize="16sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/insurance_name"
+            app:layout_constraintStart_toEndOf="@+id/yadd_name" />
+
+
+        <TextView
+            android:id="@+id/yadd_plan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:padding="3dp"
+            android:text="8 шт."
+            android:textSize="16sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/yadd_name"
+            app:layout_constraintStart_toEndOf="@+id/yadd_name" />
+
+        <TextView
+            android:id="@+id/mnp_plan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:padding="3dp"
+            android:text="9 шт."
+            android:textSize="16sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/mnp_name"
+            app:layout_constraintStart_toEndOf="@+id/yadd_name" />
+
+        <TextView
+            android:id="@+id/services_plan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:padding="3dp"
+            android:text="2 000 р."
+            android:textSize="16sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/services_name"
+            app:layout_constraintStart_toEndOf="@+id/yadd_name" />
+
+        <TextView
+            android:id="@+id/accessories_plan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:padding="3dp"
+            android:text="50 000 р."
+            android:textSize="16sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/access_name"
+            app:layout_constraintStart_toEndOf="@+id/yadd_name" />
+
+        <TextView
+            android:id="@+id/gsm_plan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:padding="3dp"
+            android:text="20 000 р."
+            android:textSize="16sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/gsm_name"
+            app:layout_constraintStart_toEndOf="@+id/yadd_name" />
+
+        <TextView
+            android:id="@+id/fact_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:padding="6dp"
+            android:text="Факт"
+            android:textSize="16sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/plan_name"
+            app:layout_constraintStart_toEndOf="@+id/accessories_plan" />
+
+        <TextView
+            android:id="@+id/gi_fact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:padding="3dp"
+            android:text="70 шт."
+            android:textSize="16sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/gi_name"
+            app:layout_constraintStart_toEndOf="@+id/accessories_plan" />
+
+        <TextView
+            android:id="@+id/ao_fact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:padding="3dp"
+            android:text="380 y.e."
+            android:textSize="16sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/ao_name"
+            app:layout_constraintStart_toEndOf="@+id/accessories_plan" />
+
+        <TextView
+            android:id="@+id/up_sale_fact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:padding="3dp"
+            android:text="70 y.e."
+            android:textSize="16sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/up_sale_name"
+            app:layout_constraintStart_toEndOf="@+id/accessories_plan" />
+
+        <TextView
+            android:id="@+id/insurance_fact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:padding="3dp"
+            android:text="690 р."
+            android:textSize="16sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/insurance_name"
+            app:layout_constraintStart_toEndOf="@+id/accessories_plan" />
+
+        <TextView
+            android:id="@+id/yadd_fact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:padding="3dp"
+            android:text="3 шт."
+            android:textSize="16sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/yadd_name"
+            app:layout_constraintStart_toEndOf="@+id/accessories_plan" />
+
+        <TextView
+            android:id="@+id/mnp_fact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:padding="3dp"
+            android:text="4 шт."
+            android:textSize="16sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/mnp_name"
+            app:layout_constraintStart_toEndOf="@+id/accessories_plan" />
+
+        <TextView
+            android:id="@+id/services_fact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:padding="3dp"
+            android:text="890 р."
+            android:textSize="16sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/services_name"
+            app:layout_constraintStart_toEndOf="@+id/accessories_plan" />
+
+        <TextView
+            android:id="@+id/access_fact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:padding="3dp"
+            android:text="32 590 р."
+            android:textSize="16sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/access_name"
+            app:layout_constraintStart_toEndOf="@+id/accessories_plan" />
+
+        <TextView
+            android:id="@+id/gsm_fact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:padding="3dp"
+            android:text="11 840 р."
+            android:textSize="16sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/gsm_name"
+            app:layout_constraintStart_toEndOf="@+id/accessories_plan" />
+
+        <TextView
+            android:id="@+id/percent_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:padding="6dp"
+            android:text="%"
+            android:textSize="16sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/index_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/access_fact" />
+
+        <TextView
+            android:id="@+id/gi_percent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="3dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:text="45%"
+            android:textSize="16sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/gi_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/access_fact"/>
+
+        <TextView
+            android:id="@+id/ao_percent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="3dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:text="37%"
+            android:textSize="16sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/ao_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/access_fact"/>
+        <TextView
+            android:id="@+id/up_sale_percent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="3dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:text="89%"
+            android:textSize="16sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/up_sale_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/access_fact"/>
+        <TextView
+            android:id="@+id/insurance_percent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="3dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:text="56%"
+            android:textSize="16sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/insurance_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/access_fact"/>
+        <TextView
+            android:id="@+id/yadd_percent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="3dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:text="45%"
+            android:textSize="16sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/yadd_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/access_fact"/>
+        <TextView
+            android:id="@+id/mnp_percent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="3dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:text="44%"
+            android:textSize="16sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/mnp_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/access_fact"/>
+
+        <TextView
+            android:id="@+id/services_percent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="3dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:text="39%"
+            android:textSize="16sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/services_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/access_fact"/>
+        <TextView
+            android:id="@+id/access_percent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="3dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:text="69%"
+            android:textSize="16sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/access_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/access_fact"/>
+        <TextView
+            android:id="@+id/gsm_percent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="3dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:text="51%"
+            android:textSize="16sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/gsm_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/access_fact"/>
+
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/nav_header_height"
+    android:background="@color/colorNavHeader"
+    android:gravity="bottom"
+    android:orientation="vertical"
+    android:paddingBottom="4dp"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+    <ImageView
+        android:id="@+id/profile_photo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/nav_header_vertical_spacing"
+        android:src="@drawable/circle" />
+
+    <TextView
+        android:id="@+id/seller_fullname_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="6dp"
+        android:paddingTop="6dp"
+        android:text="@string/Seller_fullname"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="@color/colorHeaderTxt"
+        android:textSize="17sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/dealer_name_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp"
+        android:text="ООО Новая Земля"
+        android:textColor="@color/colorHeaderTxt"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/pos_data_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp"
+        android:text="3473, пр-кт Ленинградский, д. 5, г. Оленегорск"
+        android:textColor="@color/colorHeaderTxt"
+        android:inputType="textMultiLine"
+        android:textSize="12sp" />
+
+</LinearLayout>

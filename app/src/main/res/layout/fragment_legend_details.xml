@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="9dp">
+
+        <TextView
+            android:id="@+id/legend_sub1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:paddingBottom="6dp"
+            android:paddingTop="6dp"
+            android:text="Subcategory First Order"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/legend_sub2_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/legend_sub1"
+            android:paddingLeft="6dp"
+            android:paddingStart="6dp"
+            android:text="Subcategory Second Order Label"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/legend_sub2_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/legend_sub1"
+            android:paddingEnd="6dp"
+            android:paddingRight="6dp"
+            android:text="Subcategory Value"
+            android:textSize="15sp" />
+    </RelativeLayout>
+
+</ScrollView>
