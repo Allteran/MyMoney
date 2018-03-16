@@ -34,6 +34,7 @@ import ru.tele2.mur51.terranova.mymoney.entities.Employee;
 import ru.tele2.mur51.terranova.mymoney.entities.PointOfSales;
 import ru.tele2.mur51.terranova.mymoney.entities.Salary;
 import ru.tele2.mur51.terranova.mymoney.entities.SalesPlan;
+import ru.tele2.mur51.terranova.mymoney.entities.WorkDay;
 import ru.tele2.mur51.terranova.mymoney.helpers.RealmHelper;
 import ru.tele2.mur51.terranova.mymoney.utilities.Const;
 
@@ -107,6 +108,7 @@ public class LoginActivity extends AppCompatActivity {
         realmHelper.addSalary(realm, setDummySalary());
         realmHelper.addDealerBonus(realm, setDummyDealerBonus());
         realmHelper.addSalesPlan(realm, setDummySalesPlan());
+        realmHelper.addSchedule(realm, setDummySchedule());
 
         List<String> posList = new ArrayList<>();
         for (int i = 0; i < mDealer.getPosList().size(); i++) {
@@ -250,6 +252,41 @@ public class LoginActivity extends AppCompatActivity {
         mProgressView.setVisibility(show ? View.GONE : View.VISIBLE);
         mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
         mPickPosFormView.setVisibility(show ? View.VISIBLE : View.GONE);
+    }
+
+    private List<WorkDay> setDummySchedule() {
+        List<WorkDay> workDays = new RealmList<>();
+        //First item should be empty entity with only current month cuz it will be replaced with header
+        workDays.add(new WorkDay(0,"","", "", "март"));
+        workDays.add(new WorkDay(853307,"Пн","05.03.2018", "Прозапас В.А.", "март"));
+        workDays.add(new WorkDay(853307,"Вт","06.03.2018", "Прозапас В.А.", "март"));
+        workDays.add(new WorkDay(853307,"Ср","07.03.2018", "Прозапас В.А.", "март"));
+        workDays.add(new WorkDay(853307,"Чт","08.03.2018", "Прозапас В.А.", "март"));
+        workDays.add(new WorkDay(853307,"Пт","09.03.2018", "Прозапас В.А.", "март"));
+        workDays.add(new WorkDay(853307,"Сб","10.03.2018", "Прозапас В.А.", "март"));
+        workDays.add(new WorkDay(853307,"Вс","11.03.2018", "Прозапас В.А.", "март"));
+        workDays.add(new WorkDay(853307,"Пн","12.03.2018", "Прозапас В.А.", "март"));
+        workDays.add(new WorkDay(853307,"Вт","13.03.2018", "Прозапас В.А.", "март"));
+        workDays.add(new WorkDay(853307,"Ср","14.03.2018", "Прозапас В.А.", "март"));
+        workDays.add(new WorkDay(853307,"Чт","15.03.2018", "Прозапас В.А.", "март"));
+        workDays.add(new WorkDay(853307,"Пт","16.03.2018", "Прозапас В.А.", "март"));
+        workDays.add(new WorkDay(853307,"Сб","17.03.2018", "Прозапас В.А.", "март"));
+        workDays.add(new WorkDay(853307,"Вс","18.03.2018", "Прозапас В.А.", "март"));
+        workDays.add(new WorkDay(853307,"Пн","19.03.2018", "Прозапас В.А.", "март"));
+        workDays.add(new WorkDay(853307,"Вт","20.03.2018", "Прозапас В.А.", "март"));
+        workDays.add(new WorkDay(853307,"Ср","21.03.2018", "Прозапас В.А.", "март"));
+        workDays.add(new WorkDay(853307,"Чт","22.03.2018", "Прозапас В.А.", "март"));
+        workDays.add(new WorkDay(853307,"Пт","23.03.2018", "Прозапас В.А.", "март"));
+        workDays.add(new WorkDay(853307,"Сб","24.03.2018", "Прозапас В.А.", "март"));
+        workDays.add(new WorkDay(853307,"Вс","25.03.2018", "Прозапас В.А.", "март"));
+        workDays.add(new WorkDay(853307,"Пн","26.03.2018", "Прозапас В.А.", "март"));
+        workDays.add(new WorkDay(853307,"Вт","27.03.2018", "Прозапас В.А.", "март"));
+        workDays.add(new WorkDay(853307,"Ср","28.03.2018", "Прозапас В.А.", "март"));
+        workDays.add(new WorkDay(853307,"Чт","29.03.2018", "Прозапас В.А.", "март"));
+        workDays.add(new WorkDay(853307,"Пт","30.03.2018", "Прозапас В.А.", "март"));
+        workDays.add(new WorkDay(853307,"Сб","31.03.2018", "Прозапас В.А.", "март"));
+
+        return workDays;
     }
 
     private SalesPlan setDummySalesPlan() {

@@ -1,10 +1,12 @@
 package ru.tele2.mur51.terranova.mymoney.entities;
 
+import io.realm.RealmObject;
+
 /**
  * Created by Allteran on 03.03.2018.
  */
 
-public class WorkDay {
+public class WorkDay extends RealmObject {
     private int posId;
     private String day;
     private String date;

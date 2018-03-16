@@ -46,7 +46,6 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         mSalesPlanFragment = SalesPlanFragment.newInstance(0, null);
-        mScheduleFragment = ScheduleFragment.newInstance(null, 0);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -69,6 +68,7 @@ public class MainActivity extends AppCompatActivity
 
             mMoneyFragment = MoneyChartHolderFragment.newInstance(null, posId, mSeller.getLogin());
             mDealerBonusFragment = DealerBonusFragment.newInstance("2018", mSeller.getLogin());
+            mScheduleFragment = ScheduleFragment.newInstance("2018", posId);
             mPos = realmHelper.getPos(realm, posId);
         }
         TextView userName = (TextView) findViewById(R.id.seller_fullname_textview); //user

@@ -12,6 +12,7 @@ import ru.tele2.mur51.terranova.mymoney.entities.Employee;
 import ru.tele2.mur51.terranova.mymoney.entities.PointOfSales;
 import ru.tele2.mur51.terranova.mymoney.entities.Salary;
 import ru.tele2.mur51.terranova.mymoney.entities.SalesPlan;
+import ru.tele2.mur51.terranova.mymoney.entities.WorkDay;
 
 /**
  * Created by Allteran on 15.02.2018.
@@ -145,6 +146,9 @@ public class RealmHelper {
             public void execute(Realm innerRealm) {
                 SalesPlan realmPlan = innerRealm.createObject(SalesPlan.class);
 
+                realmPlan.setPosId(plan.getPosId());
+                realmPlan.setDate(plan.getDate());
+
                 realmPlan.setAccessFact(plan.getAccessFact());
                 realmPlan.setAccessPlan(plan.getAccessPlan());
                 realmPlan.setAoFact(plan.getAoFact());
@@ -176,6 +180,51 @@ public class RealmHelper {
             }
         });
         return success[0];
+    }
+
+    public boolean addSchedule(Realm realm, final List<WorkDay> schedule) {
+        final boolean[] success = {false};
+
+        realm.executeTransactionAsync(new Realm.Transaction() {
+
+            @Override
+            public void execute(Realm innerRealm) {
+                List<WorkDay> realmSchedule = new RealmList<>();
+                for (int i = 0; i < schedule.size(); i++) {
+                    WorkDay realmDay = innerRealm.createObject(WorkDay.class);
+                    realmDay.setPosId(schedule.get(i).getPosId());
+                    realmDay.setCurrentMonth(schedule.get(i).getCurrentMonth());
+                    realmDay.setDate(schedule.get(i).getDate());
+                    realmDay.setDay(schedule.get(i).getDay());
+                    realmDay.setSeller(schedule.get(i).getSeller());
+
+                    realmSchedule.add(realmDay);
+                }
+            }
+        }, new Realm.Transaction.OnSuccess() {
+            @Override
+            public void onSuccess() {
+                success[0] = true;
+            }
+        }, new Realm.Transaction.OnError() {
+            @Override
+            public void onError(Throwable error) {
+                error.getStackTrace();
+                success[0] = false;
+            }
+        });
+        return success[0];
+    }
+
+    public List<WorkDay> getSchedule(Realm realm, int posId, String currentMonth) {
+        realm.beginTransaction();
+        List<WorkDay> schedule = realm.copyFromRealm(realm.where(WorkDay.class)
+                .equalTo("posId", posId)
+                .and()
+                .equalTo("currentMonth", currentMonth)
+                .findAll());
+        realm.commitTransaction();
+        return schedule;
     }
 
     public SalesPlan getSalesPlan(Realm realm, int posId, String date) {

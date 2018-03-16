@@ -12,9 +12,11 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.realm.Realm;
 import ru.tele2.mur51.terranova.mymoney.R;
 import ru.tele2.mur51.terranova.mymoney.adapters.ScheduleAdapter;
 import ru.tele2.mur51.terranova.mymoney.entities.WorkDay;
+import ru.tele2.mur51.terranova.mymoney.helpers.RealmHelper;
 
 /**
  * Created by Allteran on 03.03.2018.
@@ -36,7 +38,7 @@ public class ScheduleFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_schedule,container,false);
+        return inflater.inflate(R.layout.fragment_schedule, container, false);
     }
 
     @Override
@@ -49,43 +51,16 @@ public class ScheduleFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        ScheduleAdapter adapter = new ScheduleAdapter(dummySchedule());
-        recyclerView.setAdapter(adapter);
+        Realm realm = Realm.getDefaultInstance();
+        RealmHelper realmHelper = new RealmHelper();
+        if (getArguments() != null) {
+            ScheduleAdapter adapter = new ScheduleAdapter(realmHelper.getSchedule(realm,
+                    getArguments().getInt(ARG_POS_ID), getArguments().getString(ARG_DATE)));
+            recyclerView.setAdapter(adapter);
+        }
+
 
     }
 
-    private List<WorkDay> dummySchedule() {
-        List<WorkDay> workDays = new ArrayList<>();
-        //First item should be empty entity with only current month cuz it will be replaced with header
-        workDays.add(new WorkDay(0,"","", "", "март"));
-        workDays.add(new WorkDay(853307,"Пн","05.03.2018", "Прозапас В.А.", "март"));
-        workDays.add(new WorkDay(853307,"Вт","06.03.2018", "Прозапас В.А.", "март"));
-        workDays.add(new WorkDay(853307,"Ср","07.03.2018", "Прозапас В.А.", "март"));
-        workDays.add(new WorkDay(853307,"Чт","08.03.2018", "Прозапас В.А.", "март"));
-        workDays.add(new WorkDay(853307,"Пт","09.03.2018", "Прозапас В.А.", "март"));
-        workDays.add(new WorkDay(853307,"Сб","10.03.2018", "Прозапас В.А.", "март"));
-        workDays.add(new WorkDay(853307,"Вс","11.03.2018", "Прозапас В.А.", "март"));
-        workDays.add(new WorkDay(853307,"Пн","12.03.2018", "Прозапас В.А.", "март"));
-        workDays.add(new WorkDay(853307,"Вт","13.03.2018", "Прозапас В.А.", "март"));
-        workDays.add(new WorkDay(853307,"Ср","14.03.2018", "Прозапас В.А.", "март"));
-        workDays.add(new WorkDay(853307,"Чт","15.03.2018", "Прозапас В.А.", "март"));
-        workDays.add(new WorkDay(853307,"Пт","16.03.2018", "Прозапас В.А.", "март"));
-        workDays.add(new WorkDay(853307,"Сб","17.03.2018", "Прозапас В.А.", "март"));
-        workDays.add(new WorkDay(853307,"Вс","18.03.2018", "Прозапас В.А.", "март"));
-        workDays.add(new WorkDay(853307,"Пн","19.03.2018", "Прозапас В.А.", "март"));
-        workDays.add(new WorkDay(853307,"Вт","20.03.2018", "Прозапас В.А.", "март"));
-        workDays.add(new WorkDay(853307,"Ср","21.03.2018", "Прозапас В.А.", "март"));
-        workDays.add(new WorkDay(853307,"Чт","22.03.2018", "Прозапас В.А.", "март"));
-        workDays.add(new WorkDay(853307,"Пт","23.03.2018", "Прозапас В.А.", "март"));
-        workDays.add(new WorkDay(853307,"Сб","24.03.2018", "Прозапас В.А.", "март"));
-        workDays.add(new WorkDay(853307,"Вс","25.03.2018", "Прозапас В.А.", "март"));
-        workDays.add(new WorkDay(853307,"Пн","26.03.2018", "Прозапас В.А.", "март"));
-        workDays.add(new WorkDay(853307,"Вт","27.03.2018", "Прозапас В.А.", "март"));
-        workDays.add(new WorkDay(853307,"Ср","28.03.2018", "Прозапас В.А.", "март"));
-        workDays.add(new WorkDay(853307,"Чт","29.03.2018", "Прозапас В.А.", "март"));
-        workDays.add(new WorkDay(853307,"Пт","30.03.2018", "Прозапас В.А.", "март"));
-        workDays.add(new WorkDay(853307,"Сб","31.03.2018", "Прозапас В.А.", "март"));
 
-        return workDays;
-    }
 }
