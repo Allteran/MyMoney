@@ -14,6 +14,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import io.realm.Realm;
 import ru.tele2.mur51.terranova.mymoney.R;
 import ru.tele2.mur51.terranova.mymoney.entities.Dealer;
@@ -141,6 +143,7 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_about:
                 break;
             case R.id.nav_logout:
+                FirebaseAuth.getInstance().signOut();
                 Intent logoutIntent = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(logoutIntent);
                 finish();

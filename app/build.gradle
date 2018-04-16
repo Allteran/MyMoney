@@ -3,7 +3,7 @@ apply plugin: 'realm-android'
 
 android {
     compileSdkVersion 26
-    buildToolsVersion "26.0.2"
+    buildToolsVersion '27.0.3'
     defaultConfig {
         applicationId "ru.tele2.mur51.terranova.mymoney"
         minSdkVersion 20
@@ -28,8 +28,8 @@ dependencies {
     compile 'com.android.support:appcompat-v7:26.1.0'
     compile 'com.android.support:design:26.1.0'
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.2'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.google.android.gms:play-services-auth:11.8.0'
+    compile 'com.android.support.constraint:constraint-layout:1.1.0'
+    compile 'com.google.android.gms:play-services-auth:15.0.0'
     compile 'pub.devrel:easypermissions:0.3.0'
     compile('com.google.api-client:google-api-client-android:1.23.0') {
         exclude group: 'org.apache.httpcomponents'
@@ -37,5 +37,8 @@ dependencies {
     compile('com.google.apis:google-api-services-sheets:v4-rev511-1.23.0') {
         exclude group: 'org.apache.httpcomponents'
     }
+    compile 'com.google.firebase:firebase-core:15.0.0'
+    compile 'com.google.firebase:firebase-auth:15.0.0'
     testCompile 'junit:junit:4.12'
 }
+apply plugin: 'com.google.gms.google-services'

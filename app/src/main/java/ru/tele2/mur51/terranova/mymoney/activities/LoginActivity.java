@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
@@ -21,6 +22,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,22 +52,28 @@ public class LoginActivity extends AppCompatActivity {
     public static final String TAG = "LoginActivity";
     private boolean mSuccLogin;
 
-    /**
-     * Keep track of the login task to ensure we can cancel it if requested.
-     */
-    private UserLoginTask mAuthTask = null;
+    private FirebaseAuth mAuth;
 
     // UI references.
-    private AutoCompleteTextView mPhoneView;
+    private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
     private View mPickPosFormView;
-    private Spinner mPosSpinner;
 
     private Dealer mDealer;
     private String mSelectedPos;
     private String mLogin;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser != null) {
+            mLogin = currentUser.getEmail();
+            showPosPicker(true);
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,13 +81,14 @@ public class LoginActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        mAuth = FirebaseAuth.getInstance();
 
         Realm.deleteRealm(Realm.getDefaultConfiguration());
 
         Realm realm = Realm.getDefaultInstance();
         RealmHelper realmHelper = new RealmHelper();
         // Set up the login form.
-        mPhoneView = findViewById(R.id.phone);
+        mEmailView = findViewById(R.id.email);
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
         mPasswordView = findViewById(R.id.password);
@@ -101,7 +115,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         //Set up form for POS ID's picking up
-        mPosSpinner = (Spinner) findViewById(R.id.pos_ids_spinner);
+        Spinner mPosSpinner = (Spinner) findViewById(R.id.pos_ids_spinner);
 
         mDealer = setDummyDealer();
         realmHelper.addDealer(realm, mDealer);
@@ -157,16 +171,13 @@ public class LoginActivity extends AppCompatActivity {
      * errors are presented and no actual login attempt is made.
      */
     private void attemptLogin() {
-        if (mAuthTask != null) {
-            return;
-        }
 
         // Reset errors.
-        mPhoneView.setError(null);
+        mEmailView.setError(null);
         mPasswordView.setError(null);
 
         // Store values at the time of the login attempt.
-        String phone = mPhoneView.getText().toString();
+        final String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
 
         boolean cancel = false;
@@ -179,14 +190,14 @@ public class LoginActivity extends AppCompatActivity {
             cancel = true;
         }
 
-        // Check for a valid phone number.
-        if (TextUtils.isEmpty(phone)) {
-            mPhoneView.setError(getString(R.string.error_field_required));
-            focusView = mPhoneView;
+        // Check for a valid email.
+        if (TextUtils.isEmpty(email)) {
+            mEmailView.setError(getString(R.string.error_field_required));
+            focusView = mEmailView;
             cancel = true;
-        } else if (!isPhoneInvalid(phone)) {
-            mPhoneView.setError(getString(R.string.error_invalid_phone));
-            focusView = mPhoneView;
+        } else if (!isEmailValid(email)) {
+            mEmailView.setError(getString(R.string.error_invalid_phone));
+            focusView = mEmailView;
             cancel = true;
         }
 
@@ -196,23 +207,33 @@ public class LoginActivity extends AppCompatActivity {
             focusView.requestFocus();
         } else {
             // Show a progress spinner, and kick off a background task to
-            // perform the user login attempt.
             showProgress(true);
-            mAuthTask = new UserLoginTask(phone, password);
-            mAuthTask.execute((Void) null);
+            mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(
+                    new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                mLogin = email;
+                                showPosPicker(task.isSuccessful());
+                            } else {
+                                mPasswordView.setError(getString(R.string.error_incorrect_password));
+                                mPasswordView.requestFocus();
+                            }
+                        }
+                    }
+
+            );
+
+//            mAuthTask = new UserLoginTask(email, password);
+//            mAuthTask.execute((Void) null);
         }
     }
 
-    private boolean isPhoneInvalid(String phone) {
-        if (phone.length() == 12) {
-            return phone.contains("+79");
-        } else
-            return phone.length() == 11 && (phone.contains("79") || phone.contains("89")) ||
-                    phone.length() == 10 && phone.contains("9");
+    private boolean isEmailValid(String email) {
+        return email.contains("@");
     }
 
     private boolean isPasswordValid(String password) {
-        //TODO: Replace this with your own logic
         return password.length() > 4;
     }
 
@@ -257,34 +278,34 @@ public class LoginActivity extends AppCompatActivity {
     private List<WorkDay> setDummySchedule() {
         List<WorkDay> workDays = new RealmList<>();
         //First item should be empty entity with only current month cuz it will be replaced with header
-        workDays.add(new WorkDay(0,"","", "", "март"));
-        workDays.add(new WorkDay(853307,"Пн","05.03.2018", "Прозапас В.А.", "март"));
-        workDays.add(new WorkDay(853307,"Вт","06.03.2018", "Прозапас В.А.", "март"));
-        workDays.add(new WorkDay(853307,"Ср","07.03.2018", "Прозапас В.А.", "март"));
-        workDays.add(new WorkDay(853307,"Чт","08.03.2018", "Прозапас В.А.", "март"));
-        workDays.add(new WorkDay(853307,"Пт","09.03.2018", "Прозапас В.А.", "март"));
-        workDays.add(new WorkDay(853307,"Сб","10.03.2018", "Прозапас В.А.", "март"));
-        workDays.add(new WorkDay(853307,"Вс","11.03.2018", "Прозапас В.А.", "март"));
-        workDays.add(new WorkDay(853307,"Пн","12.03.2018", "Прозапас В.А.", "март"));
-        workDays.add(new WorkDay(853307,"Вт","13.03.2018", "Прозапас В.А.", "март"));
-        workDays.add(new WorkDay(853307,"Ср","14.03.2018", "Прозапас В.А.", "март"));
-        workDays.add(new WorkDay(853307,"Чт","15.03.2018", "Прозапас В.А.", "март"));
-        workDays.add(new WorkDay(853307,"Пт","16.03.2018", "Прозапас В.А.", "март"));
-        workDays.add(new WorkDay(853307,"Сб","17.03.2018", "Прозапас В.А.", "март"));
-        workDays.add(new WorkDay(853307,"Вс","18.03.2018", "Прозапас В.А.", "март"));
-        workDays.add(new WorkDay(853307,"Пн","19.03.2018", "Прозапас В.А.", "март"));
-        workDays.add(new WorkDay(853307,"Вт","20.03.2018", "Прозапас В.А.", "март"));
-        workDays.add(new WorkDay(853307,"Ср","21.03.2018", "Прозапас В.А.", "март"));
-        workDays.add(new WorkDay(853307,"Чт","22.03.2018", "Прозапас В.А.", "март"));
-        workDays.add(new WorkDay(853307,"Пт","23.03.2018", "Прозапас В.А.", "март"));
-        workDays.add(new WorkDay(853307,"Сб","24.03.2018", "Прозапас В.А.", "март"));
-        workDays.add(new WorkDay(853307,"Вс","25.03.2018", "Прозапас В.А.", "март"));
-        workDays.add(new WorkDay(853307,"Пн","26.03.2018", "Прозапас В.А.", "март"));
-        workDays.add(new WorkDay(853307,"Вт","27.03.2018", "Прозапас В.А.", "март"));
-        workDays.add(new WorkDay(853307,"Ср","28.03.2018", "Прозапас В.А.", "март"));
-        workDays.add(new WorkDay(853307,"Чт","29.03.2018", "Прозапас В.А.", "март"));
-        workDays.add(new WorkDay(853307,"Пт","30.03.2018", "Прозапас В.А.", "март"));
-        workDays.add(new WorkDay(853307,"Сб","31.03.2018", "Прозапас В.А.", "март"));
+        workDays.add(new WorkDay(0, "", "", "", "март"));
+        workDays.add(new WorkDay(853307, "Пн", "05.03.2018", "Прозапас В.А.", "март"));
+        workDays.add(new WorkDay(853307, "Вт", "06.03.2018", "Прозапас В.А.", "март"));
+        workDays.add(new WorkDay(853307, "Ср", "07.03.2018", "Прозапас В.А.", "март"));
+        workDays.add(new WorkDay(853307, "Чт", "08.03.2018", "Прозапас В.А.", "март"));
+        workDays.add(new WorkDay(853307, "Пт", "09.03.2018", "Прозапас В.А.", "март"));
+        workDays.add(new WorkDay(853307, "Сб", "10.03.2018", "Прозапас В.А.", "март"));
+        workDays.add(new WorkDay(853307, "Вс", "11.03.2018", "Прозапас В.А.", "март"));
+        workDays.add(new WorkDay(853307, "Пн", "12.03.2018", "Прозапас В.А.", "март"));
+        workDays.add(new WorkDay(853307, "Вт", "13.03.2018", "Прозапас В.А.", "март"));
+        workDays.add(new WorkDay(853307, "Ср", "14.03.2018", "Прозапас В.А.", "март"));
+        workDays.add(new WorkDay(853307, "Чт", "15.03.2018", "Прозапас В.А.", "март"));
+        workDays.add(new WorkDay(853307, "Пт", "16.03.2018", "Прозапас В.А.", "март"));
+        workDays.add(new WorkDay(853307, "Сб", "17.03.2018", "Прозапас В.А.", "март"));
+        workDays.add(new WorkDay(853307, "Вс", "18.03.2018", "Прозапас В.А.", "март"));
+        workDays.add(new WorkDay(853307, "Пн", "19.03.2018", "Прозапас В.А.", "март"));
+        workDays.add(new WorkDay(853307, "Вт", "20.03.2018", "Прозапас В.А.", "март"));
+        workDays.add(new WorkDay(853307, "Ср", "21.03.2018", "Прозапас В.А.", "март"));
+        workDays.add(new WorkDay(853307, "Чт", "22.03.2018", "Прозапас В.А.", "март"));
+        workDays.add(new WorkDay(853307, "Пт", "23.03.2018", "Прозапас В.А.", "март"));
+        workDays.add(new WorkDay(853307, "Сб", "24.03.2018", "Прозапас В.А.", "март"));
+        workDays.add(new WorkDay(853307, "Вс", "25.03.2018", "Прозапас В.А.", "март"));
+        workDays.add(new WorkDay(853307, "Пн", "26.03.2018", "Прозапас В.А.", "март"));
+        workDays.add(new WorkDay(853307, "Вт", "27.03.2018", "Прозапас В.А.", "март"));
+        workDays.add(new WorkDay(853307, "Ср", "28.03.2018", "Прозапас В.А.", "март"));
+        workDays.add(new WorkDay(853307, "Чт", "29.03.2018", "Прозапас В.А.", "март"));
+        workDays.add(new WorkDay(853307, "Пт", "30.03.2018", "Прозапас В.А.", "март"));
+        workDays.add(new WorkDay(853307, "Сб", "31.03.2018", "Прозапас В.А.", "март"));
 
         return workDays;
     }
@@ -366,32 +387,23 @@ public class LoginActivity extends AppCompatActivity {
         dummyDealer.setPosList(posList);
 
         RealmList<Employee> sellersList = new RealmList<>();
-        Employee alnikinStas = new Employee("9508996661", "123456", "Альникин",
-                "Станислав");
-        Employee girfanovaLiza = new Employee("9522949452", "123456", "Гирфанова",
-                "Елизавета");
         Employee demidenkoNatalia = new Employee("9211679499", "123456", "Демиденко",
                 "Наталья");
         Employee lishenkoDasha = new Employee("9508956482", "123456", "Лищенко",
                 "Дарья");
-        Employee pirpzhkovaNastia = new Employee("9009409927", "123456", "Пирожкова",
-                "Анастасия");
         Employee kolodkoYulia = new Employee("9533060003", "123456", "Колодько",
                 "Юлия");
         Employee pariiKsenia = new Employee("9533055511", "123456", "Парий",
                 "Ксения");
-        Employee prozapasVitalii = new Employee("9021335276", "123456", "Прозапас",
+        Employee prozapasVitalii = new Employee("danteakuma7@gmail.com", "123456", "Прозапас",
                 "Виталий");
         Employee kuznetsovaViktoria = new Employee("9537546605", "123456", "Кузнецова",
                 "Виктория");
         Employee solovievaNatalia = new Employee("9537577092", "123456", "Сольвёва",
                 "Наталья");
 
-        sellersList.add(alnikinStas);
-        sellersList.add(girfanovaLiza);
         sellersList.add(demidenkoNatalia);
         sellersList.add(lishenkoDasha);
-        sellersList.add(pirpzhkovaNastia);
         sellersList.add(kolodkoYulia);
         sellersList.add(pariiKsenia);
         sellersList.add(prozapasVitalii);
@@ -403,67 +415,5 @@ public class LoginActivity extends AppCompatActivity {
         return dummyDealer;
     }
 
-    /**
-     * Represents an asynchronous login/registration task used to authenticate
-     * the user.
-     */
-    public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
-
-        private final String mPhone;
-        private final String mPassword;
-
-        UserLoginTask(String phone, String password) {
-            mPhone = phone;
-            mPassword = password;
-        }
-
-        @Override
-        protected Boolean doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
-
-            try {
-                // Simulate network access.
-                Log.d(TAG, "Simulate network access");
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                return false;
-            }
-
-
-            //TODO: implement Realm Database to login
-            for (Employee seller : mDealer.getSellersList()) {
-                if (mPhone.equals(seller.getLogin())) {
-                    Log.d(TAG, "login is correct");
-                    if (mPassword.equals(seller.getPassword())) {
-                        Log.d(TAG, "password is correct");
-                        return true;
-                    }
-                }
-            }
-
-            // TODO: register the new account here.
-            return false;
-        }
-
-        @Override
-        protected void onPostExecute(final Boolean success) {
-            mAuthTask = null;
-            mSuccLogin = success;
-            showProgress(false);
-            if (success) {
-                mLogin = mPhone;
-                showPosPicker(success);
-            } else {
-                mPasswordView.setError(getString(R.string.error_incorrect_password));
-                mPasswordView.requestFocus();
-            }
-        }
-
-        @Override
-        protected void onCancelled() {
-            mAuthTask = null;
-            showProgress(false);
-        }
-    }
 }
 

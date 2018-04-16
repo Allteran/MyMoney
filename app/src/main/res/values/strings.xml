@@ -34,7 +34,7 @@
     <string name="title_activity_login">Вход</string>
 
     <!-- Strings related to login -->
-    <string name="hint_phone">Номер телефона</string>
+    <string name="hint_phone">E-mail</string>
     <string name="hint_password">Пароль</string>
     <string name="sign_in_button_label">Войти</string>
     <string name="sign_in_label_short">Войти</string>

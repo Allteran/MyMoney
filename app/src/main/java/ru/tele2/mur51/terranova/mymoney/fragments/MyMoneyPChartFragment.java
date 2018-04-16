@@ -36,7 +36,6 @@ public class MyMoneyPChartFragment extends Fragment {
     public static final String ARG_DATE = "report_date_pchart";
     public static final String ARG_USER = "logged_user_pchart";
     public static final String ARG_POS_ID = "pos_id_pchart";
-    private PieChart mChart;
 
     private Realm mRealm;
 
@@ -74,7 +73,7 @@ public class MyMoneyPChartFragment extends Fragment {
         reportDate.setText(getArguments().getString(ARG_DATE));
         // setup the chart with grades and data
         // get max height of the screen and set PieChart layout params programmatically
-        mChart = (PieChart) view.findViewById(R.id.pchart_whole_salary);
+        PieChart mChart = (PieChart) view.findViewById(R.id.pchart_whole_salary);
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         LayoutParams params = mChart.getLayoutParams();

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "595515711389",
+    "firebase_url": "https://mymoney-6bf4a.firebaseio.com",
+    "project_id": "mymoney-6bf4a",
+    "storage_bucket": "mymoney-6bf4a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:595515711389:android:4778e9911c680079",
+        "android_client_info": {
+          "package_name": "ru.tele2.mur51.terranova.mymoney"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "595515711389-f1lg77sjbjnuqphgrimqhamov4e38hqt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ru.tele2.mur51.terranova.mymoney",
+            "certificate_hash": "69e826dee8f5f813068402338222082933ef5a48"
+          }
+        },
+        {
+          "client_id": "595515711389-svcfhtr9j8fu64u15fblnt4eu7dhd35b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCvAh_-crc12nr0EgyTAJOecZoDDP-cgFI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "595515711389-svcfhtr9j8fu64u15fblnt4eu7dhd35b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
