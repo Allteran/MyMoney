@@ -8,18 +8,25 @@ import io.realm.RealmObject;
 
 public class Employee extends RealmObject {
     private String login;
-    private String password;
     private String firstName;
     private String secondName;
+    private int dealerId;
 
     public Employee() {
     }
 
-    public Employee(String login, String password, String firstName, String secondName) {
+    public Employee(String login, String firstName, String secondName) {
         this.login = login;
-        this.password = password;
         this.firstName = firstName;
         this.secondName = secondName;
+    }
+
+    public int getDealerId() {
+        return dealerId;
+    }
+
+    public void setDealerId(int dealerId) {
+        this.dealerId = dealerId;
     }
 
     public String getLogin() {
@@ -28,14 +35,6 @@ public class Employee extends RealmObject {
 
     public void setLogin(String login) {
         this.login = login;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getFirstName() {

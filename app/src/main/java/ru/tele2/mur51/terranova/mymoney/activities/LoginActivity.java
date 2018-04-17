@@ -4,12 +4,10 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -37,8 +35,6 @@ import io.realm.RealmList;
 import ru.tele2.mur51.terranova.mymoney.R;
 import ru.tele2.mur51.terranova.mymoney.entities.Dealer;
 import ru.tele2.mur51.terranova.mymoney.entities.DealerBonus;
-import ru.tele2.mur51.terranova.mymoney.entities.Employee;
-import ru.tele2.mur51.terranova.mymoney.entities.PointOfSales;
 import ru.tele2.mur51.terranova.mymoney.entities.Salary;
 import ru.tele2.mur51.terranova.mymoney.entities.SalesPlan;
 import ru.tele2.mur51.terranova.mymoney.entities.WorkDay;
@@ -117,8 +113,6 @@ public class LoginActivity extends AppCompatActivity {
         //Set up form for POS ID's picking up
         Spinner mPosSpinner = (Spinner) findViewById(R.id.pos_ids_spinner);
 
-        mDealer = setDummyDealer();
-        realmHelper.addDealer(realm, mDealer);
         realmHelper.addSalary(realm, setDummySalary());
         realmHelper.addDealerBonus(realm, setDummyDealerBonus());
         realmHelper.addSalesPlan(realm, setDummySalesPlan());
@@ -196,7 +190,7 @@ public class LoginActivity extends AppCompatActivity {
             focusView = mEmailView;
             cancel = true;
         } else if (!isEmailValid(email)) {
-            mEmailView.setError(getString(R.string.error_invalid_phone));
+            mEmailView.setError(getString(R.string.error_invalid_email));
             focusView = mEmailView;
             cancel = true;
         }
@@ -224,8 +218,6 @@ public class LoginActivity extends AppCompatActivity {
 
             );
 
-//            mAuthTask = new UserLoginTask(email, password);
-//            mAuthTask.execute((Void) null);
         }
     }
 
@@ -351,68 +343,6 @@ public class LoginActivity extends AppCompatActivity {
         salary.setBonusPay(5861);
 
         return salary;
-    }
-
-    private Dealer setDummyDealer() {
-        Dealer dummyDealer = new Dealer();
-        dummyDealer.setId(20005);
-        dummyDealer.setName("ООО Новая Земля");
-        RealmList<PointOfSales> posList = new RealmList<>();
-        PointOfSales murPost = new PointOfSales(853307, "Мурманская обл.", "г. Мурманск",
-                "ул. Книповича", 37);
-        PointOfSales olenPost = new PointOfSales(3473, "Мурманская обл.", "г. Оленегорск",
-                "пр-кт Ленинградский", 5);
-        PointOfSales apatityBredPost = new PointOfSales(933098, "Мурманская обл.", "г. Апатиты",
-                "ул. Бредова", 26);
-        PointOfSales apatityLenPos = new PointOfSales(3484, "Мурманская обл.", "г. Апатиты",
-                "ул. Ленина", 4);
-        PointOfSales kirovskPos = new PointOfSales(3478, "Мурманская обл.", "г. Кировск",
-                "ул. Олимпийская", 17);
-        PointOfSales pzPos = new PointOfSales(28457, "Мурманская обл.", "г. Полярные Зори",
-                "ул. Энергетиков", 33);
-        PointOfSales kovdorPos = new PointOfSales(927099, "Мурманская обл.", "г. Ковдор",
-                "ул. Кирова", 9);
-        PointOfSales alakurttiPos = new PointOfSales(927101, "Мурманская обл.", "с. Алакуртти",
-                "ул. Содружества", 9);
-
-        posList.add(murPost);
-        posList.add(olenPost);
-        posList.add(apatityBredPost);
-        posList.add(apatityLenPos);
-        posList.add(kirovskPos);
-        posList.add(pzPos);
-        posList.add(kovdorPos);
-        posList.add(alakurttiPos);
-
-        dummyDealer.setPosList(posList);
-
-        RealmList<Employee> sellersList = new RealmList<>();
-        Employee demidenkoNatalia = new Employee("9211679499", "123456", "Демиденко",
-                "Наталья");
-        Employee lishenkoDasha = new Employee("9508956482", "123456", "Лищенко",
-                "Дарья");
-        Employee kolodkoYulia = new Employee("9533060003", "123456", "Колодько",
-                "Юлия");
-        Employee pariiKsenia = new Employee("9533055511", "123456", "Парий",
-                "Ксения");
-        Employee prozapasVitalii = new Employee("danteakuma7@gmail.com", "123456", "Прозапас",
-                "Виталий");
-        Employee kuznetsovaViktoria = new Employee("9537546605", "123456", "Кузнецова",
-                "Виктория");
-        Employee solovievaNatalia = new Employee("9537577092", "123456", "Сольвёва",
-                "Наталья");
-
-        sellersList.add(demidenkoNatalia);
-        sellersList.add(lishenkoDasha);
-        sellersList.add(kolodkoYulia);
-        sellersList.add(pariiKsenia);
-        sellersList.add(prozapasVitalii);
-        sellersList.add(kuznetsovaViktoria);
-        sellersList.add(solovievaNatalia);
-
-        dummyDealer.setSellersList(sellersList);
-
-        return dummyDealer;
     }
 
 }

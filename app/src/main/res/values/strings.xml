@@ -38,7 +38,7 @@
     <string name="hint_password">Пароль</string>
     <string name="sign_in_button_label">Войти</string>
     <string name="sign_in_label_short">Войти</string>
-    <string name="error_invalid_phone">Неверный номер телефона</string>
+    <string name="error_invalid_email">Неверный номер телефона</string>
     <string name="error_invalid_password">Пароль слишком короткийt</string>
     <string name="error_incorrect_password">Неверный пароль</string>
     <string name="error_field_required">Это поле обязательно к заполнению</string>

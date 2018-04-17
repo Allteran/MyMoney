@@ -51,7 +51,6 @@ public class RealmHelper {
                 for (int i = 0; i < dealer.getSellersList().size(); i++) {
                     Employee realmSeller = innerRealm.createObject(Employee.class);
                     realmSeller.setLogin(dealer.getSellersList().get(i).getLogin());
-                    realmSeller.setPassword(dealer.getSellersList().get(i).getPassword());
                     realmSeller.setFirstName(dealer.getSellersList().get(i).getFirstName());
                     realmSeller.setSecondName(dealer.getSellersList().get(i).getSecondName());
                     realmSellersList.add(realmSeller);

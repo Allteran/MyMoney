@@ -13,7 +13,6 @@ public class Dealer extends RealmObject {
     private String name;
     private int id;
     private RealmList<PointOfSales> posList;
-    private RealmList<Employee> sellersList;
 
     public String getName() {
         return name;
@@ -37,13 +36,5 @@ public class Dealer extends RealmObject {
 
     public void setPosList(RealmList<PointOfSales> posList) {
         this.posList = posList;
-    }
-
-    public RealmList<Employee> getSellersList() {
-        return sellersList;
-    }
-
-    public void setSellersList(RealmList<Employee> sellersList) {
-        this.sellersList = sellersList;
     }
 }
