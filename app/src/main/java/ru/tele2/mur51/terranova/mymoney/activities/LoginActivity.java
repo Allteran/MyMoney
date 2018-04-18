@@ -26,6 +26,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,9 +36,11 @@ import io.realm.RealmList;
 import ru.tele2.mur51.terranova.mymoney.R;
 import ru.tele2.mur51.terranova.mymoney.entities.Dealer;
 import ru.tele2.mur51.terranova.mymoney.entities.DealerBonus;
+import ru.tele2.mur51.terranova.mymoney.entities.PointOfSales;
 import ru.tele2.mur51.terranova.mymoney.entities.Salary;
 import ru.tele2.mur51.terranova.mymoney.entities.SalesPlan;
 import ru.tele2.mur51.terranova.mymoney.entities.WorkDay;
+import ru.tele2.mur51.terranova.mymoney.helpers.FirebaseHelper;
 import ru.tele2.mur51.terranova.mymoney.helpers.RealmHelper;
 import ru.tele2.mur51.terranova.mymoney.utilities.Const;
 
@@ -49,6 +52,8 @@ public class LoginActivity extends AppCompatActivity {
     private boolean mSuccLogin;
 
     private FirebaseAuth mAuth;
+    private FirebaseHelper mDatabaseHelper;
+    private FirebaseFirestore mDatabase;
 
     // UI references.
     private AutoCompleteTextView mEmailView;
@@ -58,6 +63,7 @@ public class LoginActivity extends AppCompatActivity {
     private View mPickPosFormView;
 
     private Dealer mDealer;
+    private RealmList<PointOfSales> mPosList;
     private String mSelectedPos;
     private String mLogin;
 
@@ -77,7 +83,10 @@ public class LoginActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        mDatabaseHelper = new FirebaseHelper();
         mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseFirestore.getInstance();
 
         Realm.deleteRealm(Realm.getDefaultConfiguration());
 
@@ -118,6 +127,11 @@ public class LoginActivity extends AppCompatActivity {
         realmHelper.addSalesPlan(realm, setDummySalesPlan());
         realmHelper.addSchedule(realm, setDummySchedule());
 
+
+
+        /**
+         * Cast objects PointOfSale to ArrayList of Strings to display posIds into spinner
+         */
         List<String> posList = new ArrayList<>();
         for (int i = 0; i < mDealer.getPosList().size(); i++) {
             posList.add(String.valueOf(mDealer.getPosList().get(i).getId()));
@@ -207,7 +221,10 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
+                                //TODO: debug next lines
                                 mLogin = email;
+                                mPosList = mDatabaseHelper.getPosList(mDatabase);
+                                mDealer = mDatabaseHelper.getDealer(mDatabase,mPosList);
                                 showPosPicker(task.isSuccessful());
                             } else {
                                 mPasswordView.setError(getString(R.string.error_incorrect_password));
@@ -225,7 +242,7 @@ public class LoginActivity extends AppCompatActivity {
         return email.contains("@");
     }
 
-    private boolean isPasswordValid(String password) {
+    private boolean isPasswordValid(@NonNull String password) {
         return password.length() > 4;
     }
 
