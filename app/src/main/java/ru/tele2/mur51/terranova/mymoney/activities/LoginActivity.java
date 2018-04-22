@@ -66,6 +66,7 @@ public class LoginActivity extends AppCompatActivity {
     private RealmList<PointOfSales> mPosList;
     private String mSelectedPos;
     private String mLogin;
+    private Spinner mPosSpinner;
 
     @Override
     protected void onStart() {
@@ -87,8 +88,6 @@ public class LoginActivity extends AppCompatActivity {
         mDatabaseHelper = new FirebaseHelper();
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseFirestore.getInstance();
-
-        Realm.deleteRealm(Realm.getDefaultConfiguration());
 
         Realm realm = Realm.getDefaultInstance();
         RealmHelper realmHelper = new RealmHelper();
@@ -120,7 +119,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         //Set up form for POS ID's picking up
-        Spinner mPosSpinner = (Spinner) findViewById(R.id.pos_ids_spinner);
+        mPosSpinner = (Spinner) findViewById(R.id.pos_ids_spinner);
 
         realmHelper.addSalary(realm, setDummySalary());
         realmHelper.addDealerBonus(realm, setDummyDealerBonus());
@@ -132,13 +131,6 @@ public class LoginActivity extends AppCompatActivity {
         /**
          * Cast objects PointOfSale to ArrayList of Strings to display posIds into spinner
          */
-        List<String> posList = new ArrayList<>();
-        for (int i = 0; i < mDealer.getPosList().size(); i++) {
-            posList.add(String.valueOf(mDealer.getPosList().get(i).getId()));
-        }
-        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(this,
-                R.layout.spinner_item, posList);
-        mPosSpinner.setAdapter(spinnerAdapter);
 
         mPosSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -225,6 +217,13 @@ public class LoginActivity extends AppCompatActivity {
                                 mLogin = email;
                                 mPosList = mDatabaseHelper.getPosList(mDatabase);
                                 mDealer = mDatabaseHelper.getDealer(mDatabase,mPosList);
+                                List<String> posList = new ArrayList<>();
+                                for (int i = 0; i < mDealer.getPosList().size(); i++) { //NPE
+                                    posList.add(String.valueOf(mDealer.getPosList().get(i).getId()));
+                                }
+                                ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(LoginActivity.this,
+                                        R.layout.spinner_item, posList);
+                                mPosSpinner.setAdapter(spinnerAdapter);
                                 showPosPicker(task.isSuccessful());
                             } else {
                                 mPasswordView.setError(getString(R.string.error_incorrect_password));

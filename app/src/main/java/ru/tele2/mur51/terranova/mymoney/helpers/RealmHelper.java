@@ -48,14 +48,7 @@ public class RealmHelper {
                  * Same trick with List of Employee class
                  */
                 RealmList<Employee> realmSellersList = new RealmList<>();
-                for (int i = 0; i < dealer.getSellersList().size(); i++) {
-                    Employee realmSeller = innerRealm.createObject(Employee.class);
-                    realmSeller.setLogin(dealer.getSellersList().get(i).getLogin());
-                    realmSeller.setFirstName(dealer.getSellersList().get(i).getFirstName());
-                    realmSeller.setSecondName(dealer.getSellersList().get(i).getSecondName());
-                    realmSellersList.add(realmSeller);
-                }
-                realmDealer.setSellersList(realmSellersList);
+
             }
         }, new Realm.Transaction.OnSuccess() {
             @Override
