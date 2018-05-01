@@ -44,10 +44,6 @@ public class RealmHelper {
                 }
 
                 realmDealer.setPosList(realmPosList);
-                /**
-                 * Same trick with List of Employee class
-                 */
-                RealmList<Employee> realmSellersList = new RealmList<>();
 
             }
         }, new Realm.Transaction.OnSuccess() {
@@ -59,6 +55,31 @@ public class RealmHelper {
             @Override
             public void onError(Throwable error) {
                 error.getStackTrace();
+                addedWithSucc[0] = false;
+            }
+        });
+        return addedWithSucc[0];
+    }
+
+    public boolean addSeller(final Realm realm, final Employee seller) {
+        final boolean[] addedWithSucc = {false};
+        realm.executeTransactionAsync(new Realm.Transaction() {
+            @Override
+            public void execute(Realm innerRealm) {
+                Employee realmSeller = innerRealm.createObject(Employee.class);
+                realmSeller.setLogin(seller.getLogin());
+                realmSeller.setFirstName(seller.getFirstName());
+                realmSeller.setSecondName(seller.getSecondName());
+                realmSeller.setDealerId(seller.getDealerId());
+            }
+        }, new Realm.Transaction.OnSuccess() {
+            @Override
+            public void onSuccess() {
+                addedWithSucc[0] = true;
+            }
+        }, new Realm.Transaction.OnError() {
+            @Override
+            public void onError(Throwable error) {
                 addedWithSucc[0] = false;
             }
         });
@@ -250,10 +271,9 @@ public class RealmHelper {
         return salary;
     }
 
-    public Dealer getDealer(Realm realm, int id) {
+    public Dealer getDealer(Realm realm) {
         realm.beginTransaction();
         Dealer dealer = realm.copyFromRealm(realm.where(Dealer.class)
-                .equalTo("id", id)
                 .findFirst());
         realm.commitTransaction();
         return dealer;

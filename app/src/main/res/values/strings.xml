@@ -38,13 +38,10 @@
     <string name="hint_password">Пароль</string>
     <string name="sign_in_button_label">Войти</string>
     <string name="sign_in_label_short">Войти</string>
-    <string name="error_invalid_email">Неверный номер телефона</string>
-    <string name="error_invalid_password">Пароль слишком короткийt</string>
+    <string name="error_invalid_email">Неверный адрес электронной почты</string>
+    <string name="error_invalid_password">Пароль слишком короткий</string>
     <string name="error_incorrect_password">Неверный пароль</string>
     <string name="error_field_required">Это поле обязательно к заполнению</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
     <string name="pick_pos_label">Для начала работы необходимо указать номер точки продаж</string>
     <string name="confirm_pos_button_label">Подтвердить</string>
 </resources>

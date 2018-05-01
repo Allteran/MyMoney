@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity
         Intent intent = getIntent();
         RealmHelper realmHelper = new RealmHelper();
         if (intent != null) {
-            mDealer = realmHelper.getDealer(realm, intent.getIntExtra(Const.EXTRA_DEALER, 0));
+            mDealer = realmHelper.getDealer(realm);
             mSeller = realmHelper.getSeller(realm, intent.getStringExtra(Const.EXTRA_USER_LOGIN));
             int posId = intent.getIntExtra(Const.EXTRA_SELECTED_POS, 0);
 

@@ -48,12 +48,11 @@ import ru.tele2.mur51.terranova.mymoney.utilities.Const;
  * A login screen that offers login via phone number/password.
  */
 public class LoginActivity extends AppCompatActivity {
-    public static final String TAG = "LoginActivity";
-    private boolean mSuccLogin;
-
     private FirebaseAuth mAuth;
     private FirebaseHelper mDatabaseHelper;
     private FirebaseFirestore mDatabase;
+    private RealmHelper mRealmHelper;
+
 
     // UI references.
     private AutoCompleteTextView mEmailView;
@@ -67,13 +66,24 @@ public class LoginActivity extends AppCompatActivity {
     private String mSelectedPos;
     private String mLogin;
     private Spinner mPosSpinner;
+    private Realm mRealm;
 
     @Override
     protected void onStart() {
         super.onStart();
         FirebaseUser currentUser = mAuth.getCurrentUser();
+
         if (currentUser != null) {
             mLogin = currentUser.getEmail();
+            mDealer = mRealmHelper.getDealer(mRealm);
+            mPosList = mDealer.getPosList();
+            List<String> posList = new ArrayList<>();
+            for (int i = 0; i < mDealer.getPosList().size(); i++) { //NPE
+                posList.add(String.valueOf(mDealer.getPosList().get(i).getId()));
+            }
+            ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(LoginActivity.this,
+                    R.layout.spinner_item, posList);
+            mPosSpinner.setAdapter(spinnerAdapter);
             showPosPicker(true);
         }
     }
@@ -86,10 +96,12 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         mDatabaseHelper = new FirebaseHelper();
+        mRealmHelper = new RealmHelper();
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseFirestore.getInstance();
 
-        Realm realm = Realm.getDefaultInstance();
+
+        mRealm = Realm.getDefaultInstance();
         RealmHelper realmHelper = new RealmHelper();
         // Set up the login form.
         mEmailView = findViewById(R.id.email);
@@ -121,10 +133,10 @@ public class LoginActivity extends AppCompatActivity {
         //Set up form for POS ID's picking up
         mPosSpinner = (Spinner) findViewById(R.id.pos_ids_spinner);
 
-        realmHelper.addSalary(realm, setDummySalary());
-        realmHelper.addDealerBonus(realm, setDummyDealerBonus());
-        realmHelper.addSalesPlan(realm, setDummySalesPlan());
-        realmHelper.addSchedule(realm, setDummySchedule());
+        realmHelper.addSalary(mRealm, setDummySalary());
+        realmHelper.addDealerBonus(mRealm, setDummyDealerBonus());
+        realmHelper.addSalesPlan(mRealm, setDummySalesPlan());
+        realmHelper.addSchedule(mRealm, setDummySchedule());
 
 
 
@@ -206,7 +218,6 @@ public class LoginActivity extends AppCompatActivity {
             // form field with an error.
             focusView.requestFocus();
         } else {
-            // Show a progress spinner, and kick off a background task to
             showProgress(true);
             mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(
                     new OnCompleteListener<AuthResult>() {
@@ -216,22 +227,26 @@ public class LoginActivity extends AppCompatActivity {
                                 //TODO: debug next lines
                                 mLogin = email;
                                 mPosList = mDatabaseHelper.getPosList(mDatabase);
+                                //TODO: REMOVE NPE ON mDealer
                                 mDealer = mDatabaseHelper.getDealer(mDatabase,mPosList);
+                                showProgress(false);
                                 List<String> posList = new ArrayList<>();
                                 for (int i = 0; i < mDealer.getPosList().size(); i++) { //NPE
                                     posList.add(String.valueOf(mDealer.getPosList().get(i).getId()));
                                 }
-                                ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(LoginActivity.this,
+                                ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(LoginActivity.this,
                                         R.layout.spinner_item, posList);
                                 mPosSpinner.setAdapter(spinnerAdapter);
+
                                 showPosPicker(task.isSuccessful());
                             } else {
+                                showProgress(task.isSuccessful());
+                                showPosPicker(task.isSuccessful());
                                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                                 mPasswordView.requestFocus();
                             }
                         }
                     }
-
             );
 
         }
@@ -250,7 +265,7 @@ public class LoginActivity extends AppCompatActivity {
      */
     private void showProgress(final boolean show) {
         int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
-        if (!mSuccLogin) {
+        if (show) {
             mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
 
             mLoginFormView.animate().setDuration(shortAnimTime).alpha(
